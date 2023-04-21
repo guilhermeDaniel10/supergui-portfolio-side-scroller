@@ -1,6 +1,8 @@
 import { Player } from "./player.js";
 import { Platform } from "./platform.js";
 
+import platform from "./assets/platform.png";
+console.log(platform);
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
@@ -86,7 +88,7 @@ function addEventListeners() {
         player.moveRight();
         break;
       case "w":
-        console.log("jump");
+        console.log("jump up");
         player.jump();
         break;
       case "s":
