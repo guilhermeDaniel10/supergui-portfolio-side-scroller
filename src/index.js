@@ -4,7 +4,7 @@ import { Platform } from "./platform.js";
 import { GenericObject } from "./genericObject.js";
 import platform from "./assets/Plataforma.png";
 import hills from "./assets/hills.png";
-import clerigos from "./assets/background-clerigos.png";
+import clerigos from "./assets/background-clerigos-better.png";
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
@@ -31,7 +31,7 @@ platforms = [
 ];
 
 const genericObjects = [
-  new GenericObject(c, 40, 73, createImage(clerigos), 200, 400),
+  new GenericObject(c, 60, 28, createImage(clerigos), 320, 500),
 ];
 
 player.setCanvasContextValue(c);
