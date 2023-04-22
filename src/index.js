@@ -1,19 +1,38 @@
+import "./style.css";
 import { Player } from "./player.js";
 import { Platform } from "./platform.js";
-
-import platform from "./assets/platform.png";
-console.log(platform);
+import { GenericObject } from "./genericObject.js";
+import platform from "./assets/Plataforma.png";
+import hills from "./assets/hills.png";
+import clerigos from "./assets/background-clerigos.png";
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 1024;
+canvas.height = 576;
 const gravity = 1;
-
 let scrollOffset = 0;
 
-const player = new Player();
-const platforms = [new Platform(c, 200, 100), new Platform(c, 400, 200)];
+let platformWidth;
+let platforms;
+let player;
+
+function createImage(imageSrc) {
+  const image = new Image();
+  image.src = imageSrc;
+  return image;
+}
+
+player = new Player();
+
+platforms = [
+  new Platform(c, -1, 470, createImage(platform)),
+  new Platform(c, 579, 470, createImage(platform)),
+];
+
+const genericObjects = [
+  new GenericObject(c, 40, 73, createImage(clerigos), 200, 400),
+];
 
 player.setCanvasContextValue(c);
 animate();
@@ -21,16 +40,22 @@ addEventListeners();
 
 function animate() {
   requestAnimationFrame(animate);
-  c.clearRect(0, 0, canvas.width, canvas.height);
-  player.update(gravity);
+  c.fillStyle = "white";
+  c.fillRect(0, 0, canvas.width, canvas.height);
+
+  genericObjects.forEach((genericObject) => {
+    genericObject.draw();
+  });
+
   platforms.forEach((platform) => {
     platform.draw();
   });
+  player.update(gravity);
   playerSideMovementVelocity();
   console.log(scrollOffset);
   detectPlayerCollisionWithPlatform();
 
-  if(scrollOffset > 2000){
+  if (scrollOffset > 2000) {
     console.log("win");
   }
 }
@@ -52,10 +77,18 @@ function playerSideMovementVelocity() {
     platforms.forEach((platform) => {
       platform.decreamentPlatformXPosition(5);
     });
+
+    genericObjects.forEach((genericObject) => {
+      genericObject.decrementXPosition(3);
+    });
   } else if (playerKeys.left.pressed) {
     scrollOffset -= 5;
     platforms.forEach((platform) => {
       platform.increamentPlatformXPosition(5);
+    });
+
+    genericObjects.forEach((genericObject) => {
+      genericObject.incrementXPosition(3);
     });
   }
 }
