@@ -2,9 +2,12 @@ import "./style.css";
 import { Player } from "./player.js";
 import { Platform } from "./platform.js";
 import { GenericObject } from "./genericObject.js";
-import platform from "./assets/Plataforma.png";
+import platform from "./assets/Plataforma_relva.png";
 import hills from "./assets/hills.png";
 import clerigos from "./assets/background-clerigos-better.png";
+import cloud from "./assets/cloud.png";
+import porto from "./assets/transferir.png";
+import infoBlock from "./assets/info_block.png";
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
@@ -28,10 +31,13 @@ player = new Player();
 platforms = [
   new Platform(c, -1, 470, createImage(platform)),
   new Platform(c, 579, 470, createImage(platform)),
+  new Platform(c, 230, 250, createImage(infoBlock)),
+  new Platform(c, 600, 30, createImage(cloud)),
 ];
 
 const genericObjects = [
-  new GenericObject(c, 60, 28, createImage(clerigos), 320, 500),
+  new GenericObject(c, 200, 10, createImage(clerigos), 110, 464),
+  //new GenericObject(c, 60, 28, createImage(cloud), 2400, 1316),
 ];
 
 player.setCanvasContextValue(c);
@@ -40,7 +46,11 @@ addEventListeners();
 
 function animate() {
   requestAnimationFrame(animate);
-  c.fillStyle = "white";
+  let my_gradient = c.createLinearGradient(0, 0, 0, 170);
+  my_gradient.addColorStop(0, "#38a3d1");
+  my_gradient.addColorStop(0.7, "#90dffe");
+
+  c.fillStyle = my_gradient;
   c.fillRect(0, 0, canvas.width, canvas.height);
 
   genericObjects.forEach((genericObject) => {
@@ -79,7 +89,7 @@ function playerSideMovementVelocity() {
     });
 
     genericObjects.forEach((genericObject) => {
-      genericObject.decrementXPosition(3);
+      genericObject.decrementXPosition(2);
     });
   } else if (playerKeys.left.pressed) {
     scrollOffset -= 5;
@@ -88,7 +98,7 @@ function playerSideMovementVelocity() {
     });
 
     genericObjects.forEach((genericObject) => {
-      genericObject.incrementXPosition(3);
+      genericObject.incrementXPosition(2);
     });
   }
 }

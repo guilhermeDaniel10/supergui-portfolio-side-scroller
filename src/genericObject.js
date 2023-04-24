@@ -13,6 +13,7 @@ export class GenericObject {
     this.height = height;
 
     this.image = genericImage;
+    
   }
 
   draw() {
