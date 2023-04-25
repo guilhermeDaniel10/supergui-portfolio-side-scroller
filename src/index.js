@@ -8,6 +8,10 @@ import clerigos from "./assets/background-clerigos-better.png";
 import cloud from "./assets/cloud.png";
 import porto from "./assets/transferir.png";
 import infoBlock from "./assets/info_block.png";
+import ponte from "./assets/pontedluis.png";
+import casamusica from "./assets/casadamusica.png";
+
+
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
@@ -31,12 +35,15 @@ player = new Player();
 platforms = [
   new Platform(c, -1, 470, createImage(platform)),
   new Platform(c, 579, 470, createImage(platform)),
-  new Platform(c, 230, 250, createImage(infoBlock)),
-  new Platform(c, 600, 30, createImage(cloud)),
+  new Platform(c, 320, 250, createImage(infoBlock)),
 ];
 
 const genericObjects = [
-  new GenericObject(c, 200, 10, createImage(clerigos), 110, 464),
+  new GenericObject(c, 200, -10, createImage(clerigos), 110, 500),
+  new GenericObject(c, 600, 27, createImage(cloud), 200, 100),
+  new GenericObject(c, 600, 27, createImage(cloud), 200, 100),
+  new GenericObject(c, 380, 270, createImage(casamusica), 280, 200),
+
   //new GenericObject(c, 60, 28, createImage(cloud), 2400, 1316),
 ];
 
